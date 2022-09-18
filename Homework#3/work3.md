@@ -3,9 +3,6 @@
 62개 클래스 : 대문자 26개, 소문자 26개, 숫자 10개
 FEMNIST Dataset: https://github.com/TalwalkarLab/leaf/tree/master/data/femnist
 
-<h1> simple_cnn.py</h1>
-<img src='https://user-images.githubusercontent.com/59612454/190888359-f48635c8-5567-4504-a533-cee735624a49.png'>
-
 <h1> server.py
 <img src='https://user-images.githubusercontent.com/59612454/190888451-a968a24b-2cc5-45f8-87c1-b7068a4aec72.png'>
 
