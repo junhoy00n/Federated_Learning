@@ -1,12 +1,13 @@
-<h1>Dataset: FeMNINT</h1>
+<h1>Dataset: FEMNIST</h1>
 <h5>- 세부정보</h5>
-62개 클래스 : 대문자 26개, 소문자 26개, 숫자 10개
+<h5>62개 클래스 : 대문자 26개, 소문자 26개, 숫자 10개</h5>
 FEMNIST Dataset: https://github.com/TalwalkarLab/leaf/tree/master/data/femnist
 
-<h1> server.py
-<img src='https://user-images.githubusercontent.com/59612454/190888451-a968a24b-2cc5-45f8-87c1-b7068a4aec72.png'>
+<h4>server</h4>
+<img src='https://user-images.githubusercontent.com/59612454/190888451-a968a24b-2cc5-45f8-87c1-b7068a4aec72.png' width='70%'>
 
-<h4>!python server.py
+<h4>!python server.py</h4>
+
 <img src='https://user-images.githubusercontent.com/59612454/190888491-2ed46ca4-6a2d-4087-994f-e5a4136fb09c.png'>
 
 <h1> client.py
