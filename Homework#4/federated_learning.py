@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
+
 from torchvision import datasets, transforms
 
 import syft as sy
@@ -13,7 +14,7 @@ class Arguments():
     def __init__(self):
         self.batch_size = 64
         self.test_batch_size = 1000
-        self.epochs = 1
+        self.epochs = 5
         self.lr = 0.01
         self.momentum = 0.5
         self.no_cuda = False
@@ -85,12 +86,13 @@ class SimpleCNN(nn.Module):
 
 def train(args, model, device, train_loader, optimizer, epoch):
     model.train()
+    criterion = nn.CrossEntropyLoss()
     for batch_idx, (data, target) in enumerate(federated_train_loader):
         model.send(data.location)
         data, target = data.to(device), target.to(device)
         optimizer.zero_grad()
         output = model(data)
-        loss = F.nll_loss(output, target)
+        loss = criterion(output, target)
         loss.backward()
         optimizer.step()
         model.get()
@@ -102,11 +104,13 @@ def test(model, device, test_loader):
     model.eval()
     test_loss = 0
     correct = 0
+    criterion = nn.CrossEntropyLoss()
     with torch.no_grad():
         for data, target in test_loader:
             data, target = data.to(device), target.to(device)
             output = model(data)
-            test_loss += F.nll_loss(output, target, reduction='sum').item()
+            test_loss += criterion(output, target, reduction='sum').item()
+            F.nll_loss(output, target, reduction='sum').item()
             pred = output.argmax(1, keepdim=True)
             correct += pred.eq(target.view_as(pred)).sum().item()
 
@@ -119,4 +123,4 @@ optimizer = optim.SGD(model.parameters(), lr=args.lr)
 
 for epoch in range(1, args.epochs + 1):
     train(args, model, device, federated_train_loader, optimizer, epoch)
-    train(model, device, test_loader)
+    test(model, device, test_loader)
